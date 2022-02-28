@@ -1,10 +1,11 @@
 package mainAPP.dto;
 
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -15,11 +16,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Proveedor {
 
 	@Id
-	private char id;
+	private Character id;
 	private String nombre;
 
-	@OneToMany
-	@JoinColumn(name = "id")
+	@OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Suministra> suministra;
 
 	// CONSTRUCTORES
@@ -30,7 +30,7 @@ public class Proveedor {
 	 * @param id
 	 * @param nombre
 	 */
-	public Proveedor(char id, String nombre) {
+	public Proveedor(Character id, String nombre) {
 		this.id = id;
 		this.nombre = nombre;
 	}
@@ -40,7 +40,7 @@ public class Proveedor {
 		return id;
 	}
 
-	public void setId(char id) {
+	public void setId(Character id) {
 		this.id = id;
 	}
 

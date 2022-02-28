@@ -1,12 +1,13 @@
 package mainAPP.dto;
 
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,8 +21,7 @@ public class Pieza {
 	private int codigo;
 	private String nombre;
 
-	@OneToMany
-	@JoinColumn(name = "codigo")
+	@OneToMany(mappedBy = "pieza", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Suministra> suministra;
 
 	// CONSTRUCTORES
